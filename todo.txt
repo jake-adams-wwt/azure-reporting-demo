@@ -1,0 +1,45 @@
+boilerplate
+policy
+log analytics
+azure monitor
+alerts
+vm
+sql
+vnet
+activity logs
+diagnostic logs
+monitoring
+purview
+compliance manager
+defender
+sentinel
+health alerts
+security center alerts
+budget
+monitor for sla?
+    something on vm?
+app insights
+compliance manager?
+policy
+tagging
+
+
+
+
+
+    built in
+    vm sizes
+    business criticality on vms
+    other tags on resources
+        force business unit tag to match resource group
+        force tag presence
+
+vnet basic
+
+sql mi
+
+tags
+
+
+
+logging/monitoring?
