@@ -16,5 +16,20 @@ provider "azurerm" {
 }
 
 locals {
-  environment = "prd" # TODO: replace with TF workspace
+  environment = var.environment
+}
+
+locals {
+  common_tags = {
+    "Environment"          = local.environment,
+    "Business Unit"        = var.business_unit,
+    "Deployment Mechanism" = var.deployment_mechanism
+
+  }
+}
+
+resource "azurerm_resource_group" "resource_group" {
+  name     = "rg-${var.system_name}"
+  location = var.primary_location
+  tags     = local.common_tags
 }

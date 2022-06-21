@@ -40,8 +40,8 @@ RUN apk add gcc musl-dev python3-dev libffi-dev openssl-dev cargo make
 RUN pip install --upgrade pip
 RUN pip install azure-cli
 
-
-
+RUN apk update \
+    && apk add --no-cache bash git
 
 
 # RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash

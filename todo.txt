@@ -20,7 +20,6 @@ monitor for sla?
     something on vm?
 app insights
 compliance manager?
-policy
 tagging
 
 
