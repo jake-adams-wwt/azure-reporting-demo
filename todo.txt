@@ -1,11 +1,15 @@
 boilerplate
 policy
 log analytics
-azure monitor
-alerts
 vm
 sql
 vnet
+
+activity logs
+diagnostic logs
+
+azure monitor
+alerts
 activity logs
 diagnostic logs
 monitoring
@@ -23,7 +27,7 @@ compliance manager?
 tagging
 
 
-
+storage account?
 
 
     built in
