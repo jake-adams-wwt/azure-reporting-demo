@@ -38,3 +38,32 @@ data "azurerm_monitor_diagnostic_categories" "storage_account_diag_cat" {
 #     }
 #   }
 # }
+
+# resource "azurerm_monitor_log_profile" "example" {
+#   name = "logs-${azurerm_storage_account.storage_account.name}"
+
+#   categories = [
+#     "Action",
+#     "Delete",
+#     "Write",
+#   ]
+
+#   locations = [
+#     "westus",
+#     "global",
+#   ]
+
+#   # RootManageSharedAccessKey is created by default with listen, send, manage permissions
+#   servicebus_rule_id = "${azurerm_eventhub_namespace.example.id}/authorizationrules/RootManageSharedAccessKey"
+#   storage_account_id = azurerm_storage_account.example.id
+
+#   retention_policy {
+#     enabled = true
+#     days    = 7
+#   }
+# }
+
+resource "azurerm_advanced_threat_protection" "storage_defender" {
+  target_resource_id = azurerm_storage_account.storage_account
+  enabled            = true
+}

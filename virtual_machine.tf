@@ -73,3 +73,8 @@ resource "azurerm_windows_virtual_machine" "example" {
 
   tags = local.common_tags
 }
+
+resource "azurerm_advanced_threat_protection" "vm_defender" {
+  target_resource_id = azurerm_windows_virtual_machine.example.id
+  enabled            = true
+}
