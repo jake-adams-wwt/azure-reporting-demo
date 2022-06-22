@@ -99,7 +99,7 @@ resource "azurerm_virtual_machine_extension" "mmaagent" {
   auto_upgrade_minor_version = "true"
   settings                   = <<SETTINGS
     {
-      "workspaceId": "${azurerm_log_analytics_workspace.primary.id}"
+      "workspaceId": "${azurerm_log_analytics_workspace.primary.workspace_id}"
     }
 SETTINGS   
   protected_settings         = <<PROTECTED_SETTINGS
