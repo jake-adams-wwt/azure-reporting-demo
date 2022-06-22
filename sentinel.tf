@@ -1,7 +1,7 @@
 resource "azurerm_log_analytics_solution" "sentinel" {
   solution_name         = "SecurityInsights"
   location              = var.primary_location
-  resource_group_name   = azurerm_resource_group.resource_group
+  resource_group_name   = azurerm_resource_group.resource_group.name
   workspace_resource_id = azurerm_log_analytics_workspace.primary.id
   workspace_name        = azurerm_log_analytics_workspace.primary.name
 
