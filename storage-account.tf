@@ -64,6 +64,6 @@ data "azurerm_monitor_diagnostic_categories" "storage_account_diag_cat" {
 # }
 
 resource "azurerm_advanced_threat_protection" "storage_defender" {
-  target_resource_id = azurerm_storage_account.storage_account
+  target_resource_id = azurerm_storage_account.storage_account.id
   enabled            = true
 }
