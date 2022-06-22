@@ -42,7 +42,10 @@ variable "deployment_mechanism" {
 }
 
 
-
+variable "purview_location" {
+  type        = string
+  description = "Purview Azure Region"
+}
 
 
 
