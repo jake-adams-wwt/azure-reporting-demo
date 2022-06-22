@@ -4,17 +4,17 @@
 # }
 
 
-resource "azurerm_security_center_subscription_pricing" "example" {
+resource "azurerm_security_center_subscription_pricing" "defender_vm" {
   tier          = "Standard"
   resource_type = "VirtualMachines"
 }
 
-resource "azurerm_security_center_subscription_pricing" "example" {
+resource "azurerm_security_center_subscription_pricing" "defender_sql" {
   tier          = "Standard"
   resource_type = "SqlServers"
 }
 
-resource "azurerm_security_center_subscription_pricing" "example" {
+resource "azurerm_security_center_subscription_pricing" "defender_storage" {
   tier          = "Standard"
   resource_type = "StorageAccounts"
 }
