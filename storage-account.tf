@@ -1,4 +1,4 @@
-resource "azurerm_storage_account" "example" {
+resource "azurerm_storage_account" "storage_account" {
   name                     = "st${replace(var.system_name,"-","")}"
   resource_group_name      = azurerm_resource_group.resource_group.name
   location                 = var.primary_location
@@ -8,4 +8,33 @@ resource "azurerm_storage_account" "example" {
   min_tls_version = "TLS1_0"
 
   tags = local.common_tags
+}
+
+# data "azurerm_monitor_diagnostic_categories" "example" {
+#   resource_id = data.azurerm_key_vault.example.id
+# }
+
+
+resource "azurerm_monitor_diagnostic_setting" "example" {
+  name               = "diag-${azurerm_storage_account.storage_account.name}"
+  target_resource_id = azurerm_storage_account.storage_account.id
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.primary.id
+#   storage_account_id = data.azurerm_storage_account.example.id
+
+  log {
+    category = "Administrative"
+    # enabled  = false
+
+    retention_policy {
+      enabled = false
+    }
+  }
+
+  metric {
+    category = "AllMetrics"
+
+    retention_policy {
+      enabled = false
+    }
+  }
 }
