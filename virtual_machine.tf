@@ -8,6 +8,7 @@ resource "azurerm_network_interface" "main" {
     subnet_id                     = azurerm_subnet.subnet_servers.id
     private_ip_address_allocation = "Dynamic"
   }
+  tags = local.common_tags
 }
 
 resource "azurerm_virtual_machine" "main" {
