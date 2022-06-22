@@ -90,22 +90,78 @@ resource "azurerm_windows_virtual_machine" "example" {
 # }
 
 
-resource "azurerm_virtual_machine_extension" "mmaagent" {
-  name                       = "mmaagent"
+# resource "azurerm_virtual_machine_extension" "mmaagent" {
+#   name                       = "mmaagent"
+#   virtual_machine_id         = azurerm_windows_virtual_machine.example.id
+#   publisher                  = "Microsoft.EnterpriseCloud.Monitoring"
+#   type                       = "MicrosoftMonitoringAgent"
+#   type_handler_version       = "1.0"
+#   auto_upgrade_minor_version = "true"
+#   settings                   = <<SETTINGS
+#     {
+#       "workspaceId": "${azurerm_log_analytics_workspace.primary.workspace_id}"
+#     }
+# SETTINGS   
+#   protected_settings         = <<PROTECTED_SETTINGS
+#    {
+#       "workspaceKey": "${azurerm_log_analytics_workspace.primary.primary_shared_key}"
+#    }
+# PROTECTED_SETTINGS
+#   tags                       = local.common_tags
+# }
+
+resource "azurerm_virtual_machine_extension" "monitor-DependencyAgent-agent" {
+  # count                 = "${var.do_bootstrap == true ? 1 : 0}"
+  name = "vmext-monitorDepAgent-${azurerm_windows_virtual_machine.example.name}"
+  # location              = "${var.location}"
+  # resource_group_name   = "${var.rg_name}"
+  # location            = var.primary_location
+  # resource_group_name = azurerm_resource_group.resource_group.name
+  # virtual_machine_name  = "${azurerm_windows_virtual_machine.example.id}"
+  virtual_machine_id         = azurerm_windows_virtual_machine.example.id
+  publisher                  = "Microsoft.Azure.Monitoring.DependencyAgent"
+  type                       = "DependencyAgentWindows"
+  type_handler_version       = "9.5"
+  auto_upgrade_minor_version = true
+
+  settings = <<SETTINGS
+        {
+          "workspaceId": "${azurerm_log_analytics_workspace.primary.workspace_id}"
+        }
+SETTINGS
+
+  protected_settings = <<PROTECTED_SETTINGS
+        {
+          "workspaceKey": "${azurerm_log_analytics_workspace.primary.primary_shared_key}"
+        }
+PROTECTED_SETTINGS
+
+  tags = local.common_tags
+}
+
+resource "azurerm_virtual_machine_extension" "monitor-agent" {
+  # count = var.do_bootstrap == true ? 1 : 0
+  name  = "vmext-monitorAgent-${azurerm_windows_virtual_machine.example.name}"
+  #  location = var.primary_location
+  #   resource_group_name = azurerm_resource_group.resource_group.name
+  # virtual_machine_name  = "${azurerm_windows_virtual_machine.example.name}"
   virtual_machine_id         = azurerm_windows_virtual_machine.example.id
   publisher                  = "Microsoft.EnterpriseCloud.Monitoring"
   type                       = "MicrosoftMonitoringAgent"
   type_handler_version       = "1.0"
-  auto_upgrade_minor_version = "true"
-  settings                   = <<SETTINGS
-    {
-      "workspaceId": "${azurerm_log_analytics_workspace.primary.workspace_id}"
-    }
-SETTINGS   
-  protected_settings         = <<PROTECTED_SETTINGS
-   {
-      "workspaceKey": "${azurerm_log_analytics_workspace.primary.primary_shared_key}"
-   }
+  auto_upgrade_minor_version = true
+
+  settings = <<SETTINGS
+        {
+          "workspaceId": "${azurerm_log_analytics_workspace.primary.workspace_id}"
+        }
+SETTINGS
+
+  protected_settings = <<PROTECTED_SETTINGS
+        {
+          "workspaceKey": "${azurerm_log_analytics_workspace.primary.primary_shared_key}"
+        }
 PROTECTED_SETTINGS
-  tags                       = local.common_tags
+
+  tags = local.common_tags
 }
