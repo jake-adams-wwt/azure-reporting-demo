@@ -107,4 +107,5 @@ SETTINGS
       "workspaceKey": "${azurerm_log_analytics_workspace.primary.primary_shared_key}"
    }
 PROTECTED_SETTINGS
+  tags                       = local.common_tags
 }
