@@ -1,12 +1,12 @@
-# resource "azurerm_log_analytics_solution" "example" {
-#   solution_name         = "SecurityInsights"
-#   location              = azurerm_resource_group.example.location
-#   resource_group_name   = azurerm_resource_group.example.name
-#   workspace_resource_id = azurerm_log_analytics_workspace.example.id
-#   workspace_name        = azurerm_log_analytics_workspace.example.name
+resource "azurerm_log_analytics_solution" "sentinel" {
+  solution_name         = "SecurityInsights"
+  location              = var.primary_location
+  resource_group_name   = azurerm_resource_group.resource_group
+  workspace_resource_id = azurerm_log_analytics_workspace.primary.id
+  workspace_name        = azurerm_log_analytics_workspace.primary.name
 
-#   plan {
-#     publisher = "Microsoft"
-#     product   = "OMSGallery/SecurityInsights"
-#   }
-# }
+  plan {
+    publisher = "Microsoft"
+    product   = "OMSGallery/SecurityInsights"
+  }
+}
