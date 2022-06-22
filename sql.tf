@@ -18,9 +18,9 @@ resource "azurerm_mssql_server" "main" {
 # }
 
 resource "azurerm_mssql_database" "db" {
-  name                = "sql-${var.system_name}"
-  server_id         = azurerm_mssql_server.main.id
-  sku_name = "Basic"
+  name      = "sql-${var.system_name}"
+  server_id = azurerm_mssql_server.main.id
+  sku_name  = "Basic"
 
   #   extended_auditing_policy {
   #     storage_endpoint                        = azurerm_storage_account.example.primary_blob_endpoint
