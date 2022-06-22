@@ -49,7 +49,7 @@ resource "azurerm_network_interface" "main" {
 
 
 resource "azurerm_windows_virtual_machine" "example" {
-  name                  = "vm-${substr(var.system_name, 0, 13)}"
+  name                  = "vm-${substr(var.system_name, 0, 12)}"
   location              = var.primary_location
   resource_group_name   = azurerm_resource_group.resource_group.name
   network_interface_ids = [azurerm_network_interface.main.id]
