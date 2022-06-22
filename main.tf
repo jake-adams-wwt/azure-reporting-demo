@@ -24,6 +24,7 @@ locals {
     "Environment"          = local.environment,
     "Business Unit"        = var.business_unit,
     "Deployment Mechanism" = var.deployment_mechanism
+    "owner" = var.owner
 
   }
 }
