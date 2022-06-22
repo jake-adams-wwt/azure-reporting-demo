@@ -1,5 +1,5 @@
 resource "azurerm_storage_account" "example" {
-  name                     = "st${var.system_name}"
+  name                     = "st${replace(var.system_name,"-","")}"
   resource_group_name      = azurerm_resource_group.resource_group.name
   location                 = var.primary_location
   account_tier             = "Standard"
