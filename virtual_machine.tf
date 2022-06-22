@@ -79,12 +79,32 @@ resource "azurerm_windows_virtual_machine" "example" {
 #   enabled            = true
 # }
 
-resource "azurerm_virtual_machine_extension" "da" {
-  name                       = "DAExtension"
+# resource "azurerm_virtual_machine_extension" "da" {
+#   name                       = "DAExtension"
+#   virtual_machine_id         = azurerm_windows_virtual_machine.example.id
+#   publisher                  = "Microsoft.Azure.Monitoring.DependencyAgent"
+#   type                       = "DependencyAgentWindows"
+#   type_handler_version       = "9.10"
+#   auto_upgrade_minor_version = true
+#   tags                       = local.common_tags
+# }
+
+
+resource "azurerm_virtual_machine_extension" "mmaagent" {
+  name                       = "mmaagent"
   virtual_machine_id         = azurerm_windows_virtual_machine.example.id
-  publisher                  = "Microsoft.Azure.Monitoring.DependencyAgent"
-  type                       = "DependencyAgentWindows"
-  type_handler_version       = "9.10"
-  auto_upgrade_minor_version = true
-  tags                       = local.common_tags
+  publisher                  = "Microsoft.EnterpriseCloud.Monitoring"
+  type                       = "MicrosoftMonitoringAgent"
+  type_handler_version       = "1.0"
+  auto_upgrade_minor_version = "true"
+  settings                   = <<SETTINGS
+    {
+      "workspaceId": "${azurerm_log_analytics_workspace.primary.id}"
+    }
+SETTINGS   
+  protected_settings         = <<PROTECTED_SETTINGS
+   {
+      "workspaceKey": "${azurerm_log_analytics_workspace.primary.primary_shared_key}"
+   }
+PROTECTED_SETTINGS
 }
