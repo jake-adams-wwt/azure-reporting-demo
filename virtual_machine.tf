@@ -81,7 +81,7 @@ resource "azurerm_windows_virtual_machine" "example" {
 
 resource "azurerm_virtual_machine_extension" "da" {
   name                       = "DAExtension"
-  virtual_machine_id         = azurerm_virtual_machine.example.id
+  virtual_machine_id         = azurerm_windows_virtual_machine.example.id
   publisher                  = "Microsoft.Azure.Monitoring.DependencyAgent"
   type                       = "DependencyAgentWindows"
   type_handler_version       = "9.10"
