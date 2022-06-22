@@ -10,31 +10,31 @@ resource "azurerm_storage_account" "storage_account" {
   tags = local.common_tags
 }
 
-# data "azurerm_monitor_diagnostic_categories" "example" {
-#   resource_id = data.azurerm_key_vault.example.id
-# }
-
-
-resource "azurerm_monitor_diagnostic_setting" "example" {
-  name               = "diag-${azurerm_storage_account.storage_account.name}"
-  target_resource_id = azurerm_storage_account.storage_account.id
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.primary.id
-#   storage_account_id = data.azurerm_storage_account.example.id
-
-  log {
-    category = "Administrative"
-    # enabled  = false
-
-    retention_policy {
-      enabled = false
-    }
-  }
-
-  metric {
-    category = "AllMetrics"
-
-    retention_policy {
-      enabled = false
-    }
-  }
+data "azurerm_monitor_diagnostic_categories" "storage_account_diag_cat" {
+  resource_id = azurerm_storage_account.storage_account.id
 }
+
+
+# resource "azurerm_monitor_diagnostic_setting" "storage_account_diag" {
+#   name               = "diag-${azurerm_storage_account.storage_account.name}"
+#   target_resource_id = azurerm_storage_account.storage_account.id
+#   log_analytics_workspace_id = azurerm_log_analytics_workspace.primary.id
+# #   storage_account_id = data.azurerm_storage_account.example.id
+
+#   log {
+#     category = "Administrative"
+#     # enabled  = false
+
+#     retention_policy {
+#       enabled = false
+#     }
+#   }
+
+#   metric {
+#     category = "AllMetrics"
+
+#     retention_policy {
+#       enabled = false
+#     }
+#   }
+# }
